@@ -1,8 +1,32 @@
+const training_data = [
+  {
+    inputs: [0, 0],
+    targets: [0]
+  },
+  {
+    inputs: [0, 1],
+    targets: [1]
+  },
+  {
+    inputs: [1, 0],
+    targets: [1]
+  },
+  {
+    inputs: [1, 1],
+    targets: [0]
+  },
+];
+
 function setup() {
-  let nn = new NeuralNetwork(2, 3, 2);
+  let nn = new NeuralNetwork(2, 2, 1);
 
-  let inputs = [1, 0];
-  let targets = [1, 0];
+  for (let i = 0; i < 50000; i++) {
+    let data = random(training_data);
+    nn.train(data.inputs, data.targets);
+  }
 
-  let b = nn.train(inputs, targets);
+  console.log(nn.predict([0, 0]));
+  console.log(nn.predict([0, 1]));
+  console.log(nn.predict([1, 0]));
+  console.log(nn.predict([1, 1]));
 }
